@@ -9,14 +9,16 @@ Endpoints can be localhost or dev environments.
 AWS access tokens will automatically be generated for dev enviroments,
 but AWS CLI and appropriate access keys will need to be present.
 
-Ouput will be CSV file that can be imported into Excel for analsys
 
-Usage: python3 elasticdiff.py
+Ouput will be CSV file that can be imported into Excel for analysis.
+
+Usage: `$ python3 elasticdiff.py`
 
 The tool does not have any CLI arguments, but instead uses a config.json file to define parameters.
 
 Example config.json:
 
+```
 {
     "url1": "http://localhost:9200/mot_search_stack/_search",     // Endpoint 1.
     "url2": "http://localhost:9200/mot_search_stack2/_search",    // Endpoint 2.
@@ -35,4 +37,4 @@ Example config.json:
       ...    
     }
 }
-
+```
