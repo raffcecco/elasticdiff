@@ -1,0 +1,140 @@
+{
+    "url1": "http://localhost:9200/mot_search_stack/_search",
+    "url2": "http://localhost:9200/mot_search_stack2/_search",
+
+    "searchTerms": ["brake", "wheel", "rust"],
+
+    "searchTermsFile" : "",
+
+    "diffFile": "diffs.csv",
+
+    "elasticQuery1": {
+        "_source": [
+            "description",
+            "testItemSelectorName",
+            "advisoryText"
+        ],
+        "query": {
+            "bool": {
+                "minimum_should_match": 1,
+                "should": [
+                    {
+                        "multi_match": {
+                            "query": "lump",
+                            "fields": [
+                                "description",
+                                "testItemSelectorName",
+                                "advisoryText"
+                            ],
+                            "operator": "AND",
+                            "type": "best_fields",
+                            "fuzziness": "AUTO"
+                        }
+                    }
+                ],
+                "filter": {
+                    "bool": {
+                        "must": [
+                            {
+                                "bool": {
+                                    "should": [
+                                        {
+                                            "range": {
+                                                "startDate": {
+                                                    "gte": "2018-05-01",
+                                                    "format": "yyyy-MM-dd"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "bool": {
+                                                "must_not": {
+                                                    "exists": {
+                                                        "field": "endDate"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "term": {
+                                    "vehicleClasses": "4"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "from": 0,
+        "size": 10
+    },
+
+    "elasticQuery2": {
+        "_source": [
+            "description",
+            "testItemSelectorName",
+            "advisoryText"
+        ],
+        "query": {
+            "bool": {
+                "minimum_should_match": 1,
+                "should": [
+                    {
+                        "multi_match": {
+                            "query": "lump",
+                            "fields": [
+                                "description",
+                                "testItemSelectorName",
+                                "advisoryText"
+                            ],
+                            "operator": "AND",
+                            "type": "best_fields",
+                            "fuzziness": "AUTO"
+                        }
+                    }
+                ],
+                "filter": {
+                    "bool": {
+                        "must": [
+                            {
+                                "bool": {
+                                    "should": [
+                                        {
+                                            "range": {
+                                                "startDate": {
+                                                    "gte": "2018-05-01",
+                                                    "format": "yyyy-MM-dd"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "bool": {
+                                                "must_not": {
+                                                    "exists": {
+                                                        "field": "endDate"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "term": {
+                                    "vehicleClasses": "4"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "from": 0,
+        "size": 10
+    }
+
+
+}

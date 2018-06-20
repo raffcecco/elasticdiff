@@ -1,0 +1,4 @@
+requests_aws4auth==0.9
+boto3==1.7.40
+requests==2.18.4
+botocore==1.10.40
